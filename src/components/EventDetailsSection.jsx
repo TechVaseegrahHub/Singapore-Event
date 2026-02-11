@@ -33,7 +33,7 @@ const HowToBookSection = () => {
       <div className="max-w-7xl mx-auto">
         
         {/* Top Content Area - Optimized for mobile */}
-        <div className="text-center mb-10 md:mb-16">
+        <div className="text-center mb-6 md:mb-16">
           <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-3 md:mb-4">
             How to Book
           </h2>
@@ -44,29 +44,63 @@ const HowToBookSection = () => {
 
         {/* 
           Container Logic:
-          - Mobile: Horizontal scrolling carousel (snap-x) with optimized sizing
+          - Mobile: Single full-width image display (chat screenshot)
           - Desktop: 4-column Grid
         */}
-        <div className="flex overflow-x-auto pb-6 gap-4 snap-x snap-mandatory md:grid md:grid-cols-4 md:pb-0 md:gap-6 scrollbar-hide">
+        
+        {/* Mobile View - Full WhatsApp Chat Screenshot */}
+        <div className="block md:hidden mb-6">
+          <div className="bg-white rounded-2xl overflow-hidden shadow-xl border border-gray-100">
+            <img
+              src="/assets/image/Image1.png"
+              alt="WhatsApp Chat - How to Book"
+              className="w-full h-auto object-contain block"
+              loading="lazy"
+            />
+          </div>
+          
+          {/* Chat Info Overlay */}
+          <div className="mt-4 p-4 bg-gray-50 rounded-xl">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <span className="text-gray-900 font-semibold">+65 835739621</span>
+                <span className="px-2 py-1 bg-green-100 text-green-700 text-xs rounded-full">Testy</span>
+              </div>
+            </div>
+            <div className="mt-2 flex items-center gap-2 text-sm text-gray-600">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinecap="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path strokeLinecap="round" strokeLinecap="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+              <span>Current location is: 1.5km from here</span>
+            </div>
+            <div className="mt-1 text-xs text-gray-500">
+              Please enter your Taps for more
+            </div>
+          </div>
+        </div>
+
+        {/* Desktop Grid - 4 Column (Hidden on mobile) */}
+        <div className="hidden md:grid md:grid-cols-4 md:gap-6">
           {STEPS.map((item) => (
             <div 
               key={item.id} 
-              className="flex-shrink-0 w-[75%] sm:w-[45%] md:w-full snap-center group"
+              className="group"
             >
-              {/* Step Label and Title - Centered on mobile */}
-              <div className="mb-4 md:mb-6 text-center md:text-left">
-                <span className="inline-block px-3 py-1 rounded-full bg-blue-50 text-blue-600 font-semibold text-xs md:text-sm mb-1 md:mb-2 uppercase tracking-wider">
+              {/* Step Label and Title */}
+              <div className="mb-6 text-left">
+                <span className="inline-block px-3 py-1 rounded-full bg-blue-50 text-blue-600 font-semibold text-xs md:text-sm mb-2 uppercase tracking-wider">
                   {item.step}
                 </span>
                 <h3 className="text-lg md:text-xl font-bold text-gray-800">{item.title}</h3>
               </div>
 
-              {/* Image Card - Optimized aspect ratio for mobile */}
-              <div className="bg-white rounded-2xl md:rounded-[2.5rem] overflow-hidden shadow-xl md:shadow-2xl border border-gray-100 transition-all duration-300 group-hover:shadow-blue-100 group-hover:md:-translate-y-2">
+              {/* Image Card */}
+              <div className="bg-white rounded-[2.5rem] overflow-hidden shadow-2xl border border-gray-100 transition-all duration-300 group-hover:shadow-blue-100 group-hover:-translate-y-2">
                 <img
                   src={item.src}
                   alt={item.title}
-                  className="w-full aspect-[3/4] md:aspect-[9/18] object-cover object-top block"
+                  className="w-full aspect-[9/18] object-cover object-top block"
                   loading="lazy"
                 />
               </div>
@@ -74,20 +108,16 @@ const HowToBookSection = () => {
           ))}
         </div>
 
-        {/* Mobile Swipe Indicator Dots - Enhanced visibility */}
+        {/* Mobile Swipe Indicator - Updated for single image */}
         <div className="flex justify-center gap-2 mt-6 md:hidden">
-          {STEPS.map((_, i) => (
-            <div 
-              key={i} 
-              className={`w-2 h-2 rounded-full ${
-                i === 0 ? 'bg-blue-600 w-4' : 'bg-blue-200'
-              } transition-all duration-300`}
-            ></div>
-          ))}
+          <div className="w-4 h-2 bg-blue-600 rounded-full"></div>
+          <div className="w-2 h-2 bg-blue-200 rounded-full"></div>
+          <div className="w-2 h-2 bg-blue-200 rounded-full"></div>
+          <div className="w-2 h-2 bg-blue-200 rounded-full"></div>
         </div>
 
-        {/* Call to Action Button - WhatsApp Link - Optimized for mobile */}
-        <div className="flex justify-center mt-10 md:mt-16 px-4 md:px-0">
+        {/* Call to Action Button - WhatsApp Link */}
+        <div className="flex justify-center mt-8 md:mt-16 px-4 md:px-0">
           <a
             href="https://wa.me/6580579621?text=book%20ticket"
             target="_blank"
@@ -107,7 +137,7 @@ const HowToBookSection = () => {
             <span className="relative z-10">Book on WhatsApp</span>
             <span className="absolute inset-0 bg-gradient-to-r from-green-600 to-green-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"></span>
             
-            {/* Arrow icon for desktop, hidden on mobile */}
+            {/* Arrow icon for desktop */}
             <svg 
               className="hidden md:block relative z-10 w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" 
               fill="none" 
@@ -119,20 +149,23 @@ const HowToBookSection = () => {
           </a>
         </div>
 
-        {/* Mobile Sticky WhatsApp Button Alternative - Optional */}
+        {/* Mobile Sticky WhatsApp Button Alternative */}
+        <div className="fixed bottom-4 left-4 right-4 md:hidden">
+          <a
+            href="https://wa.me/6580579621?text=book%20ticket"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center w-full px-6 py-4 text-base font-semibold text-white bg-gradient-to-r from-green-500 to-green-600 rounded-full shadow-lg"
+          >
+            <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.473-.149-.673.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.672-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+              <path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.554 4.124 1.523 5.877L.043 23.35c-.104.436.276.816.712.712l5.473-1.48C7.876 22.446 9.877 23 12 23c6.627 0 12-5.373 12-12S18.627 0 12 0z"/>
+            </svg>
+            Book on WhatsApp
+          </a>
+        </div>
 
       </div>
-
-      {/* CSS to hide scrollbar on mobile carousel */}
-      <style jsx>{`
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
-        }
-        .scrollbar-hide {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-      `}</style>
     </section>
   );
 };
