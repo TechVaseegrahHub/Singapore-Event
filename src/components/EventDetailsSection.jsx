@@ -32,8 +32,8 @@ const HowToBookSection = () => {
     <section id="how-to-book" className="bg-white py-12 px-4 md:py-20 md:px-10">
       <div className="max-w-7xl mx-auto">
         
-        {/* Top Content Area - Optimized for mobile */}
-        <div className="text-center mb-10 md:mb-16">
+        {/* Top Content Area */}
+        <div className="text-center mb-8 md:mb-16">
           <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-3 md:mb-4">
             How to Book
           </h2>
@@ -44,50 +44,52 @@ const HowToBookSection = () => {
 
         {/* 
           Container Logic:
-          - Mobile: Horizontal scrolling carousel (snap-x) with optimized sizing
+          - Mobile: Horizontal scrolling carousel (snap-x) with full images
           - Desktop: 4-column Grid
         */}
-        <div className="flex overflow-x-auto pb-6 gap-4 snap-x snap-mandatory md:grid md:grid-cols-4 md:pb-0 md:gap-6 scrollbar-hide">
+        <div className="flex overflow-x-auto pb-4 gap-4 snap-x snap-mandatory md:grid md:grid-cols-4 md:pb-0 md:gap-6 scrollbar-hide">
           {STEPS.map((item) => (
             <div 
               key={item.id} 
-              className="flex-shrink-0 w-[75%] sm:w-[45%] md:w-full snap-center group"
+              className="flex-shrink-0 w-[85%] sm:w-[60%] md:w-full snap-center group"
             >
-              {/* Step Label and Title - Centered on mobile */}
-              <div className="mb-4 md:mb-6 text-center md:text-left">
+              {/* Step Label and Title */}
+              <div className="mb-3 md:mb-6 text-center md:text-left">
                 <span className="inline-block px-3 py-1 rounded-full bg-blue-50 text-blue-600 font-semibold text-xs md:text-sm mb-1 md:mb-2 uppercase tracking-wider">
                   {item.step}
                 </span>
                 <h3 className="text-lg md:text-xl font-bold text-gray-800">{item.title}</h3>
               </div>
 
-              {/* Image Card - Optimized aspect ratio for mobile */}
+              {/* Image Card - Full image visible on mobile */}
               <div className="bg-white rounded-2xl md:rounded-[2.5rem] overflow-hidden shadow-xl md:shadow-2xl border border-gray-100 transition-all duration-300 group-hover:shadow-blue-100 group-hover:md:-translate-y-2">
-                <img
-                  src={item.src}
-                  alt={item.title}
-                  className="w-full aspect-[3/4] md:aspect-[9/18] object-cover object-top block"
-                  loading="lazy"
-                />
+                <div className="relative w-full aspect-[4/5] md:aspect-[9/16]">
+                  <img
+                    src={item.src}
+                    alt={item.title}
+                    className="absolute inset-0 w-full h-full object-contain md:object-cover bg-gray-50"
+                    loading="lazy"
+                  />
+                </div>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Mobile Swipe Indicator Dots - Enhanced visibility */}
-        <div className="flex justify-center gap-2 mt-6 md:hidden">
+        {/* Mobile Swipe Indicator Dots */}
+        <div className="flex justify-center gap-2 mt-4 md:hidden">
           {STEPS.map((_, i) => (
             <div 
               key={i} 
-              className={`w-2 h-2 rounded-full ${
+              className={`w-2 h-2 rounded-full transition-all duration-300 ${
                 i === 0 ? 'bg-blue-600 w-4' : 'bg-blue-200'
-              } transition-all duration-300`}
+              }`}
             ></div>
           ))}
         </div>
 
-        {/* Call to Action Button - WhatsApp Link - Optimized for mobile */}
-        <div className="flex justify-center mt-10 md:mt-16 px-4 md:px-0">
+        {/* WhatsApp Button */}
+        <div className="flex justify-center mt-8 md:mt-16 px-4 md:px-0">
           <a
             href="https://wa.me/6580579621?text=book%20ticket"
             target="_blank"
@@ -96,7 +98,7 @@ const HowToBookSection = () => {
           >
             {/* WhatsApp Icon */}
             <svg 
-              className="w-5 h-5 mr-2 md:mr-2 group-hover:scale-110 transition-transform duration-300" 
+              className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform duration-300" 
               fill="currentColor" 
               viewBox="0 0 24 24"
             >
@@ -107,7 +109,7 @@ const HowToBookSection = () => {
             <span className="relative z-10">Book on WhatsApp</span>
             <span className="absolute inset-0 bg-gradient-to-r from-green-600 to-green-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"></span>
             
-            {/* Arrow icon for desktop, hidden on mobile */}
+            {/* Desktop Arrow */}
             <svg 
               className="hidden md:block relative z-10 w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" 
               fill="none" 
@@ -118,12 +120,9 @@ const HowToBookSection = () => {
             </svg>
           </a>
         </div>
-
-        {/* Mobile Sticky WhatsApp Button Alternative - Optional */}
-
       </div>
 
-      {/* CSS to hide scrollbar on mobile carousel */}
+      {/* CSS to hide scrollbar */}
       <style jsx>{`
         .scrollbar-hide::-webkit-scrollbar {
           display: none;
