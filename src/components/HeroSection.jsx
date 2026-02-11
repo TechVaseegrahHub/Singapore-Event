@@ -14,8 +14,8 @@ function HeroSection() {
   const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
-  const scrollToDetails = () => {
-    const element = document.getElementById('details');
+  const scrollToHowToBook = () => {
+    const element = document.getElementById('how-to-book');
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
@@ -93,7 +93,7 @@ function HeroSection() {
               className="pt-8"
             >
               <button
-                onClick={scrollToDetails}
+                onClick={scrollToHowToBook}
                 className="group relative inline-flex items-center space-x-3 bg-gradient-to-r from-[#FF8C00] to-[#DC2626] text-white px-10 py-5 rounded-full font-bold text-lg transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 neon-glow-orange"
               >
                 <span>Book your Seat</span>

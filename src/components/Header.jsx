@@ -21,6 +21,10 @@ function Header() {
     }
   };
 
+  const handleBookNow = () => {
+    window.open('https://wa.me/6580579621?text=book%20ticket', '_blank');
+  };
+
   return (
     <header 
       className={`sticky top-0 z-50 transition-all duration-300 ${
@@ -60,10 +64,10 @@ function Header() {
               Highlights
             </button>
             <button 
-              onClick={() => scrollToSection('details')}
+              onClick={() => scrollToSection('how-to-book')}
               className="text-white hover:text-[#FF8C00] transition-colors font-medium"
             >
-              Event Details
+              How to book
             </button>
             <button 
               onClick={() => scrollToSection('partners')}
@@ -72,7 +76,7 @@ function Header() {
               Partners
             </button>
             <button 
-              onClick={() => scrollToSection('details')}
+              onClick={handleBookNow}
               className="bg-[#FF8C00] hover:bg-[#DC2626] text-white px-6 py-2.5 rounded-full font-bold transition-all duration-300 transform hover:scale-105 shadow-lg"
             >
               Book Now
@@ -104,10 +108,10 @@ function Header() {
               Highlights
             </button>
             <button 
-              onClick={() => scrollToSection('details')}
+              onClick={() => scrollToSection('how-to-book')}
               className="block w-full text-left text-white hover:text-[#FF8C00] transition-colors font-medium py-2"
             >
-              Event Details
+              How to book
             </button>
             <button 
               onClick={() => scrollToSection('partners')}
@@ -116,7 +120,7 @@ function Header() {
               Partners
             </button>
             <button 
-              onClick={() => scrollToSection('details')}
+              onClick={handleBookNow}
               className="w-full bg-[#FF8C00] hover:bg-[#DC2626] text-white px-6 py-3 rounded-full font-bold transition-all duration-300 mt-4"
             >
               Book Now
