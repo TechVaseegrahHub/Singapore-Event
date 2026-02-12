@@ -44,7 +44,7 @@ const HowToBookSection = () => {
 
         {/* 
           Container Logic:
-          - Mobile: Horizontal scrolling carousel (snap-x) with full images
+          - Mobile: Horizontal scrolling carousel (snap-x) with full image
           - Desktop: 4-column Grid
         */}
         <div className="flex overflow-x-auto pb-4 gap-4 snap-x snap-mandatory md:grid md:grid-cols-4 md:pb-0 md:gap-6 scrollbar-hide">

@@ -1,134 +1,355 @@
-import React from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { User } from 'lucide-react';
 
 function SpeakersSection() {
+  // Updated speakers with provided data - OLD COLORS RESTORED
   const speakers = [
     {
-      name: 'Vijaya Mahadevan',
-      title: 'Founder of Vasantya Vedha',
-      color: 'from-[#1E40AF] to-[#3B82F6]',
-      image: '/images/vijaya-mahadevan.jpg',
-      glow: 'neon-glow-blue'
-    },
-    {
-      name: 'SreeKarthikeyan Mahadevan',
-      title: 'CEO & Founder of Tech Mavigath',
+      name: 'VIJAYA',
+      surname: 'MAHADEVAN',
+      title: 'FOUNDER',
+      company: 'VASEEGARA VEDHA',
+      image: './assets/image/vijaya.png',
       color: 'from-[#DC2626] to-[#EF4444]',
-      glow: 'neon-glow-red'
+      textColor: '#DC2626',
     },
     {
-      name: 'Sudhan',
-      title: 'Director, Universal Mobiles',
-      color: 'from-[#FF8C00] to-[#FFA500]',
-      glow: 'neon-glow-orange'
-    },
-    {
-      name: 'Srikanth',
-      title: 'Director, Super Deluxe Kitchen',
-      color: 'from-[#1E40AF] to-[#3B82F6]',
-      glow: 'neon-glow-blue'
-    },
-    {
-      name: 'Habib',
-      title: 'Director Utsahid',
+      name: 'SREEKARTHIKEYAN',
+      surname: 'MAHADEVAN',
+      title: 'CEO & FOUNDER',
+      company: 'TECH VASEEGRAH',
+      image: './assets/image/ceo3.jpg',
       color: 'from-[#DC2626] to-[#EF4444]',
-      glow: 'neon-glow-red'
+      textColor: '#DC2626',
     },
     {
-      name: 'Naresh',
-      title: 'Influencer',
+      name: 'SUDHAN',
+      surname: '',
+      title: 'DIRECTOR',
+      company: 'UNIVERCEL MOBILES',
+      image: './assets/image/Sudhan.jpeg',
       color: 'from-[#FF8C00] to-[#FFA500]',
-      glow: 'neon-glow-orange'
+      textColor: '#FF8C00',
     },
     {
-      name: 'Rithik Pandian',
-      title: 'Influencer',
+      name: 'SRIKANTH',
+      surname: '',
+      title: 'DIRECTOR',
+      company: 'SUPER DELUXE KITCHEN',
+      image: './assets/image/Srikanth.jpeg',
+      color: 'from-[#10B981] to-[#34D399]',
+      textColor: '#10B981',
+    },
+    {
+      name: 'HABIB',
+      surname: '',
+      title: 'DIRECTOR',
+      company: 'LINKMEU',
+      image: './assets/image/Habib.jpeg',
+      color: 'from-[#DC2626] to-[#EF4444]',
+      textColor: '#DC2626',
+    },
+    {
+      name: 'NARESH',
+      surname: '',
+      title: 'INFLUENCER',
+      company: 'DIGITAL CREATOR',
+      image: './assets/image/Naresh.jpeg',
+      color: 'from-[#DC2626] to-[#EF4444]',
+      textColor: '#DC2626',
+    },
+    {
+      name: 'RITHIK',
+      surname: 'PANDIAN',
+      title: 'INFLUENCER',
+      company: 'CONTENT CREATOR',
+      image: './assets/image/RithikPandian.jpeg',
       color: 'from-[#1E40AF] to-[#3B82F6]',
-      glow: 'neon-glow-blue'
-    }
+      textColor: '#1E40AF',
+    },
   ];
 
+  // Create duplicated array for seamless infinite scroll
+  const duplicatedSpeakers = [...speakers, ...speakers];
+  
+  const scrollContainerRef = useRef(null);
+  const scrollAnimationRef = useRef(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const scrollSpeed = useRef(80); // Increased from 40 to 80 for faster loop speed
+
+  // Smooth infinite scroll animation
+  const startAutoScroll = useCallback(() => {
+    if (!scrollContainerRef.current) return;
+
+    const scrollContainer = scrollContainerRef.current;
+    const scrollWidth = scrollContainer.scrollWidth;
+    
+    let scrollPos = scrollContainer.scrollLeft;
+    const maxScroll = scrollWidth / 2;
+    
+    const animateScroll = () => {
+      scrollPos += scrollSpeed.current / 60;
+      
+      if (scrollPos >= maxScroll) {
+        scrollPos = 0;
+        scrollContainer.scrollLeft = 0;
+      } else {
+        scrollContainer.scrollLeft = scrollPos;
+      }
+      
+      const itemWidth = scrollWidth / duplicatedSpeakers.length;
+      const newIndex = Math.floor(scrollPos / itemWidth) % speakers.length;
+      setCurrentIndex(newIndex);
+      
+      scrollAnimationRef.current = requestAnimationFrame(animateScroll);
+    };
+    
+    scrollAnimationRef.current = requestAnimationFrame(animateScroll);
+  }, [duplicatedSpeakers.length, speakers.length]);
+
+  // Initialize auto-scroll
+  useEffect(() => {
+    startAutoScroll();
+    
+    return () => {
+      if (scrollAnimationRef.current) {
+        cancelAnimationFrame(scrollAnimationRef.current);
+      }
+    };
+  }, [startAutoScroll]);
+
+  const [loadedimage, setLoadedimage] = useState({});
+
+  const handleImageLoad = (index) => {
+    setLoadedimage(prev => ({ ...prev, [index]: true }));
+  };
+
+  const handleImageError = (index) => {
+    setLoadedimage(prev => ({ ...prev, [index]: false }));
+  };
+
+  // Preload image with high priority
+  useEffect(() => {
+    speakers.forEach((speaker, index) => {
+      if (speaker.image && speaker.image.startsWith('http')) {
+        const img = new Image();
+        img.src = speaker.image;
+        img.crossOrigin = "anonymous";
+        img.fetchPriority = "high";
+        img.onload = () => handleImageLoad(index);
+        img.onerror = () => handleImageError(index);
+      }
+    });
+  }, []);
+
   return (
-    <section id="speakers" className="py-20 bg-gradient-to-b from-white to-slate-50 relative overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5 pointer-events-none">
-        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-500 via-transparent to-transparent"></div>
+    <section id="speakers" className="py-12 bg-gradient-to-b from-[#1E40AF] to-[#0F172A] relative overflow-hidden">
+      {/* Background Pattern - Clean, no shadows */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,rgba(220,38,38,0.05),transparent_70%)]"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_60%,rgba(30,64,175,0.05),transparent_70%)]"></div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          transition={{ duration: 0.5 }}
+          className="text-center mb-8"
         >
-          <h2 className="text-4xl sm:text-5xl font-black text-[#1E40AF] mb-4 tracking-tight text-shadow-3d">
-            Meet Our Speakers
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white mb-2 tracking-tight">
+            MEET OUR
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <h3 className="text-4xl sm:text-5xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#FF8C00] via-[#FFD700] to-[#DC2626] uppercase tracking-tight mb-3">
+            SPEAKERS
+          </h3>
+          <p className="text-sm sm:text-base md:text-lg text-white/80 max-w-2xl mx-auto px-4 font-light">
             Industry leaders and experts sharing their insights
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 perspective-2000">
-          {speakers.map((speaker, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, rotateX: 30, y: 50 }}
-              whileInView={{ opacity: 1, rotateX: 0, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1, duration: 0.6, type: "spring" }}
-              whileHover={{ 
-                scale: 1.05, 
-                rotateY: 10,
-                rotateX: 5,
-                z: 50,
-                transition: { duration: 0.3 }
-              }}
-              className="group relative transform-style-3d"
-            >
-              <div className={`
-                relative h-full bg-white/80 backdrop-blur-xl rounded-2xl p-6 
-                border border-white/50 shadow-xl transition-all duration-300
-                group-hover:${speaker.glow} group-hover:border-transparent
-              `}>
-                {/* 3D Floating Image */}
-                <div className="relative w-40 h-40 mx-auto mb-6 transform-style-3d group-hover:translate-z-10 transition-transform duration-500">
-                  <div className={`
-                    absolute inset-0 rounded-full bg-gradient-to-br ${speaker.color} 
-                    opacity-20 blur-xl group-hover:opacity-40 transition-opacity
-                  `}></div>
-                  <div className={`
-                    relative w-full h-full rounded-full bg-gradient-to-br ${speaker.color} 
-                    p-1 shadow-lg group-hover:shadow-2xl transition-all duration-300
-                  `}>
-                    <div className="w-full h-full rounded-full bg-white flex items-center justify-center overflow-hidden">
-                      <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
-                        <User size={60} className="text-gray-400" />
+        {/* Infinite Scroll Container - NO BLUE SHADOWS ON SIDES */}
+        <div className="relative">
+          {/* NO fade gradients - Removed completely */}
+          
+          {/* Scroll Container */}
+          <div 
+            ref={scrollContainerRef}
+            className="flex overflow-x-auto py-6 px-2 hide-scrollbar"
+            style={{
+              WebkitOverflowScrolling: 'touch',
+              scrollbarWidth: 'none',
+              msOverflowStyle: 'none'
+            }}
+          >
+            {duplicatedSpeakers.map((speaker, index) => (
+              <div
+                key={`${speaker.name}-${index}`}
+                className="flex-shrink-0 w-[280px] sm:w-[320px] md:w-[380px] mx-2 sm:mx-3 perspective-container"
+              >
+                <motion.div
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4 }}
+                  className="relative group"
+                  style={{
+                    transformStyle: 'preserve-3d',
+                    transform: 'perspective(1500px) rotateY(0deg) rotateX(0deg)',
+                  }}
+                  whileHover={{
+                    transform: 'perspective(1500px) rotateY(-3deg) rotateX(3deg) translateZ(10px)',
+                    transition: { duration: 0.4 }
+                  }}
+                >
+                  {/* 3D Image Container */}
+                  <div className="relative w-full h-[350px] sm:h-[400px] md:h-[450px] rounded-xl overflow-hidden shadow-md">
+                    
+                    {/* Background Image - NO BLACK SHADOW OVERLAY */}
+                    <div className="absolute inset-0">
+                      {speaker.image && (speaker.image.startsWith('http') ? loadedimage[index % speakers.length] !== false : true) ? (
+                        <>
+                          {/* REMOVED black gradient overlay completely */}
+                          
+                          <img
+                            src={speaker.image}
+                            alt={speaker.name}
+                            className="w-full h-full object-cover object-center scale-100 transition-transform duration-700 group-hover:scale-105"
+                            style={{
+                              imageRendering: 'crisp-edges',
+                              WebkitImageRendering: 'crisp-edges',
+                            }}
+                            onLoad={() => speaker.image.startsWith('http') && handleImageLoad(index % speakers.length)}
+                            onError={() => speaker.image.startsWith('http') && handleImageError(index % speakers.length)}
+                            loading="eager"
+                          />
+                          
+                          {/* Very subtle gradient just for text readability */}
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent z-10"></div>
+                        </>
+                      ) : (
+                        <div className={`w-full h-full bg-gradient-to-br ${speaker.color} flex items-center justify-center`}>
+                          <span className="text-white text-4xl sm:text-5xl font-black">
+                            {speaker.name[0]}{speaker.surname?.[0]}
+                          </span>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Light Effect - Minimal */}
+                    <div className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity duration-500 z-20"
+                      style={{
+                        background: 'linear-gradient(145deg, rgba(255,255,255,0.05) 0%, transparent 80%, rgba(0,0,0,0.05) 100%)',
+                      }}>
+                    </div>
+
+                    {/* Text Overlay - Clean with very minimal shadow */}
+                    <div className="absolute inset-0 flex flex-col justify-end p-5 sm:p-6 md:p-8 z-30">
+                      
+                      {/* Speaker name - Minimal shadow */}
+                      <div className="mb-1">
+                        <span className="text-2xl sm:text-3xl md:text-4xl font-black text-white uppercase tracking-tight leading-tight"
+                              style={{ 
+                                textShadow: '0 2px 4px rgba(0,0,0,0.3)',
+                                WebkitFontSmoothing: 'antialiased',
+                              }}>
+                          {speaker.name}
+                        </span>
+                      </div>
+                      
+                      {/* Surname with gradient - Vibrant */}
+                      <div className="mb-2">
+                        <span className="text-3xl sm:text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#FF8C00] via-[#FFD700] to-[#DC2626] uppercase tracking-tight leading-tight"
+                              style={{ 
+                                textShadow: '0 2px 8px rgba(0,0,0,0.15)',
+                              }}>
+                          {speaker.surname || speaker.title.split(' ')[0]}
+                        </span>
+                      </div>
+                      
+                      {/* Role - White with minimal shadow */}
+                      <div className="mb-2">
+                        <span className="text-sm sm:text-base md:text-lg font-bold text-white uppercase tracking-wide"
+                              style={{ textShadow: '0 1px 3px rgba(0,0,0,0.3)' }}>
+                          {speaker.title}
+                        </span>
+                      </div>
+                      
+                      {/* Company - White with minimal shadow */}
+                      <div className="mb-1">
+                        <p className="text-xs sm:text-sm md:text-base text-white/90 uppercase tracking-wide font-light"
+                           style={{ textShadow: '0 1px 2px rgba(0,0,0,0.2)' }}>
+                          {speaker.company}
+                        </p>
+                      </div>
+                      
+                      
+                      {/* Decorative 3D element - Subtle */}
+                      <div className="absolute bottom-4 right-4 w-10 h-10 opacity-20">
+                        <div className="absolute inset-0 border border-white/30 rounded transform rotate-12"></div>
+                        <div className="absolute inset-1 border border-white/20 rounded transform -rotate-6"></div>
                       </div>
                     </div>
-                  </div>
-                </div>
 
-                {/* Speaker Info */}
-                <div className="text-center transform-style-3d group-hover:translate-z-5 transition-transform duration-500">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-[#1E40AF] transition-colors">
-                    {speaker.name}
-                  </h3>
-                  <p className="text-sm text-gray-600 font-medium">
-                    {speaker.title}
-                  </p>
-                </div>
-                
-                {/* Shine Effect */}
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-white/0 via-white/30 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                    {/* Edge highlight - Very subtle */}
+                    <div className="absolute inset-0 border border-white/5 rounded-xl pointer-events-none z-40"></div>
+                  </div>
+
+                  {/* 3D Shadow - Very light */}
+                  <div className="absolute -bottom-3 left-10 right-10 h-8 bg-black/10 blur-md rounded-full transform scale-90 opacity-20 group-hover:opacity-30 transition-opacity duration-500"></div>
+                </motion.div>
               </div>
-            </motion.div>
-          ))}
+            ))}
+          </div>
+        </div>
+
+        {/* Mobile swipe indicator */}
+        <div className="text-center mt-8 md:hidden">
+          <div className="inline-flex items-center space-x-3">
+            <span className="text-white/60 text-2xl animate-pulse">←</span>
+            <span className="text-xs uppercase tracking-widest text-white/70 font-light">Swipe to explore</span>
+            <span className="text-white/60 text-2xl animate-pulse">→</span>
+          </div>
+        </div>
+
+        {/* Progress indicators */}
+        <div className="flex justify-center mt-6 md:hidden">
+          <div className="flex space-x-1.5">
+            {speakers.slice(0, 5).map((_, index) => (
+              <div
+                key={index}
+                className={`h-1 rounded-full transition-all duration-300 ${
+                  currentIndex % speakers.length === index 
+                    ? 'w-6 bg-gradient-to-r from-[#FF8C00] to-[#DC2626]' 
+                    : 'w-1.5 bg-white/30'
+                }`}
+              />
+            ))}
+          </div>
         </div>
       </div>
+
+      {/* Global styles */}
+      <style jsx>{`
+        .hide-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+        .hide-scrollbar {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+        
+        .perspective-container {
+          perspective: 2000px;
+          perspective-origin: center;
+        }
+        
+        @media (max-width: 640px) {
+          .perspective-container {
+            perspective: 1500px;
+          }
+        }
+      `}</style>
     </section>
   );
 }
