@@ -13,10 +13,10 @@ function EventLandingPage() {
   return (
     <>
       <Helmet>
-        <title>MAKEIO 2026 - Digital Power for Business Growth | Tamil Event Singapore</title>
+        <title>Digital Shakthi 2026 - Digital Power for Business Growth | Tamil Event Singapore</title>
         <meta 
           name="description" 
-          content="Join MAKEIO 2026 on February 22 in Singapore. Learn from industry experts about digital transformation, personal branding, and business opportunities. Book your seat now for $15!" 
+          content="Join Digital Shakthi 2026 on February 22 in Singapore. Learn from industry experts about digital transformation, personal branding, and business opportunities. Book your seat now for $15!" 
         />
       </Helmet>
 
