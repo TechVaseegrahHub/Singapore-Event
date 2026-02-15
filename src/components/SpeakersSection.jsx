@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
 
 function SpeakersSection() {
-  // Updated speakers with provided data - OLD COLORS RESTORED
+  // Updated speakers with consistent colors matching the image
   const speakers = [
     {
       name: 'VIJAYA',
@@ -28,8 +28,8 @@ function SpeakersSection() {
       title: 'DIRECTOR',
       company: 'UNIVERCEL MOBILES',
       image: './assets/image/Sudhan.jpeg',
-      color: 'from-[#FF8C00] to-[#FFA500]',
-      textColor: '#FF8C00',
+      color: 'from-[#DC2626] to-[#EF4444]',
+      textColor: '#DC2626',
     },
     {
       name: 'SRIKANTH',
@@ -37,8 +37,8 @@ function SpeakersSection() {
       title: 'DIRECTOR',
       company: 'SUPER DELUXE KITCHEN',
       image: './assets/image/Srikanth.jpeg',
-      color: 'from-[#10B981] to-[#34D399]',
-      textColor: '#10B981',
+      color: 'from-[#DC2626] to-[#EF4444]',
+      textColor: '#DC2626',
     },
     {
       name: 'HABIB',
@@ -64,8 +64,8 @@ function SpeakersSection() {
       title: 'INFLUENCER',
       company: 'CONTENT CREATOR',
       image: './assets/image/RithikPandian.jpeg',
-      color: 'from-[#1E40AF] to-[#3B82F6]',
-      textColor: '#1E40AF',
+      color: 'from-[#DC2626] to-[#EF4444]',
+      textColor: '#DC2626',
     },
   ];
 
@@ -75,7 +75,7 @@ function SpeakersSection() {
   const scrollContainerRef = useRef(null);
   const scrollAnimationRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const scrollSpeed = useRef(80); // Increased from 40 to 80 for faster loop speed
+  const scrollSpeed = useRef(80);
 
   // Smooth infinite scroll animation
   const startAutoScroll = useCallback(() => {
@@ -143,9 +143,15 @@ function SpeakersSection() {
   }, []);
 
   return (
-    <section id="speakers" className="py-12 bg-gradient-to-b from-[#1E40AF] to-[#0F172A] relative overflow-hidden">
-      {/* Background Pattern - Clean, no shadows */}
-      <div className="absolute inset-0 pointer-events-none">
+    <section id="speakers" className="py-12 relative overflow-hidden">
+      {/* Gradient Background - Fixed with proper syntax */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#1E40AF]/90 via-[#1E40AF]/80 to-[#0F172A]/90 z-0"></div>
+
+      {/* Red Overlay - Matching HeroSection */}
+      <div className="absolute inset-0 bg-[#DC2626] opacity-10 mix-blend-overlay z-0"></div>
+
+      {/* Background Pattern */}
+      <div className="absolute inset-0 pointer-events-none z-0">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,rgba(220,38,38,0.05),transparent_70%)]"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_60%,rgba(30,64,175,0.05),transparent_70%)]"></div>
       </div>
@@ -169,9 +175,8 @@ function SpeakersSection() {
           </p>
         </motion.div>
 
-        {/* Infinite Scroll Container - NO BLUE SHADOWS ON SIDES */}
+        {/* Infinite Scroll Container */}
         <div className="relative">
-          {/* NO fade gradients - Removed completely */}
           
           {/* Scroll Container */}
           <div 
@@ -205,12 +210,10 @@ function SpeakersSection() {
                   {/* 3D Image Container */}
                   <div className="relative w-full h-[350px] sm:h-[400px] md:h-[450px] rounded-xl overflow-hidden shadow-md">
                     
-                    {/* Background Image - NO BLACK SHADOW OVERLAY */}
+                    {/* Background Image */}
                     <div className="absolute inset-0">
                       {speaker.image && (speaker.image.startsWith('http') ? loadedimage[index % speakers.length] !== false : true) ? (
                         <>
-                          {/* REMOVED black gradient overlay completely */}
-                          
                           <img
                             src={speaker.image}
                             alt={speaker.name}
@@ -224,8 +227,8 @@ function SpeakersSection() {
                             loading="eager"
                           />
                           
-                          {/* Very subtle gradient just for text readability */}
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent z-10"></div>
+                          {/* Subtle gradient for text readability */}
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent z-10"></div>
                         </>
                       ) : (
                         <div className={`w-full h-full bg-gradient-to-br ${speaker.color} flex items-center justify-center`}>
@@ -243,59 +246,58 @@ function SpeakersSection() {
                       }}>
                     </div>
 
-                    {/* Text Overlay - Clean with very minimal shadow */}
+                    {/* Text Overlay */}
                     <div className="absolute inset-0 flex flex-col justify-end p-5 sm:p-6 md:p-8 z-30">
                       
-                      {/* Speaker name - Minimal shadow */}
+                      {/* Speaker name */}
                       <div className="mb-1">
                         <span className="text-2xl sm:text-3xl md:text-4xl font-black text-white uppercase tracking-tight leading-tight"
                               style={{ 
-                                textShadow: '0 2px 4px rgba(0,0,0,0.3)',
+                                textShadow: '0 2px 4px rgba(0,0,0,0.5)',
                                 WebkitFontSmoothing: 'antialiased',
                               }}>
                           {speaker.name}
                         </span>
                       </div>
                       
-                      {/* Surname with gradient - Vibrant */}
+                      {/* Surname with gradient */}
                       <div className="mb-2">
                         <span className="text-3xl sm:text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#FF8C00] via-[#FFD700] to-[#DC2626] uppercase tracking-tight leading-tight"
                               style={{ 
-                                textShadow: '0 2px 8px rgba(0,0,0,0.15)',
+                                textShadow: '0 2px 8px rgba(0,0,0,0.3)',
                               }}>
                           {speaker.surname || speaker.title.split(' ')[0]}
                         </span>
                       </div>
                       
-                      {/* Role - White with minimal shadow */}
+                      {/* Role */}
                       <div className="mb-2">
                         <span className="text-sm sm:text-base md:text-lg font-bold text-white uppercase tracking-wide"
-                              style={{ textShadow: '0 1px 3px rgba(0,0,0,0.3)' }}>
+                              style={{ textShadow: '0 1px 3px rgba(0,0,0,0.5)' }}>
                           {speaker.title}
                         </span>
                       </div>
                       
-                      {/* Company - White with minimal shadow */}
+                      {/* Company */}
                       <div className="mb-1">
                         <p className="text-xs sm:text-sm md:text-base text-white/90 uppercase tracking-wide font-light"
-                           style={{ textShadow: '0 1px 2px rgba(0,0,0,0.2)' }}>
+                           style={{ textShadow: '0 1px 2px rgba(0,0,0,0.4)' }}>
                           {speaker.company}
                         </p>
                       </div>
                       
-                      
-                      {/* Decorative 3D element - Subtle */}
+                      {/* Decorative 3D element */}
                       <div className="absolute bottom-4 right-4 w-10 h-10 opacity-20">
                         <div className="absolute inset-0 border border-white/30 rounded transform rotate-12"></div>
                         <div className="absolute inset-1 border border-white/20 rounded transform -rotate-6"></div>
                       </div>
                     </div>
 
-                    {/* Edge highlight - Very subtle */}
+                    {/* Edge highlight */}
                     <div className="absolute inset-0 border border-white/5 rounded-xl pointer-events-none z-40"></div>
                   </div>
 
-                  {/* 3D Shadow - Very light */}
+                  {/* 3D Shadow */}
                   <div className="absolute -bottom-3 left-10 right-10 h-8 bg-black/10 blur-md rounded-full transform scale-90 opacity-20 group-hover:opacity-30 transition-opacity duration-500"></div>
                 </motion.div>
               </div>
@@ -327,6 +329,11 @@ function SpeakersSection() {
             ))}
           </div>
         </div>
+      </div>
+
+      {/* Windows Activation Message - Bottom Right */}
+      <div className="absolute bottom-4 right-4 z-20 text-white/30 text-xs">
+        Activate Windows
       </div>
 
       {/* Global styles */}
