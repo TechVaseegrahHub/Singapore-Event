@@ -78,7 +78,7 @@ function HeroSection() {
               தொழில் முறை / நிபுணம் / டிஜிட்டல் தொடர்பான சிறப்பு உயர்வாளர்கள்
             </motion.p>
 
-            {/* CTA Button - Centered */}
+            {/* CTA Button - Centered with fixed gradient */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -87,7 +87,7 @@ function HeroSection() {
             >
               <button
                 onClick={scrollToHowToBook}
-                className="group relative inline-flex items-center space-x-3 bg-gradient-to-r from-[#FF8C00] to-[#DC2626] text-white px-10 py-5 rounded-full font-bold text-lg transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 neon-glow-orange"
+                className="group relative inline-flex items-center space-x-3 bg-gradient-to-r from-[#FF8C00] to-[#DC2626] hover:from-[#DC2626] hover:to-[#FF8C00] text-white px-10 py-5 rounded-full font-bold text-lg transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 shadow-lg"
               >
                 <span>Book your Seat </span>
                 <ArrowRight className="group-hover:translate-x-1 transition-transform" size={24} />
