@@ -20,6 +20,17 @@ function PartnersSection() {
       logo: '/assets/image/VEE.png',
       alt: 'VEE Logo'
     },
+
+    { 
+      name: 'tECH', 
+      logo: '/assets/image/logo.png',
+      alt: 'VEE Logo'
+    },
+    { 
+      name: 'Vaseegrah', 
+      logo: '/assets/image/image.png',
+      alt: 'VEE Logo'
+    },
     { 
       name: 'azzle', 
       logo: '/assets/image/azzle.png',
