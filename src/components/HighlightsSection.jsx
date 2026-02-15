@@ -5,7 +5,7 @@ import { BusinessChart3D, TechIcon3D, BrandingIcon3D, InfluencerIcon3D, Cube3D }
 
 function HighlightsSection() {
   const highlights = [
-    { title: 'Inspiring Stories', icon: Cube3D, description: 'Learn from real-world success stories' },
+    { title: 'Digital Transformation', icon: Cube3D, description: 'Driving innovation with modern technology' },
     { title: 'Business Opportunities', icon: BusinessChart3D, description: 'Discover new avenues for growth' },
     { title: 'Branding Technologies', icon: TechIcon3D, description: 'Master digital branding tools' },
     { title: 'Personal Branding', icon: BrandingIcon3D, description: 'Build your online presence' },
