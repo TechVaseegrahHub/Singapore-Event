@@ -38,12 +38,14 @@ function Header() {
           {/* Logo */}
           <div className="flex items-center space-x-3">
             <div className="flex items-center">
-              <span className="text-3xl font-black text-white tracking-tight">MAKE</span>
-              <span className="text-3xl font-black text-[#FF8C00] tracking-tight">IO</span>
+             
+               <span className="text-4xl sm:text-5xl md:text-6xl lg:text-2xl font-black text-white leading-tight tracking-tight text-shadow-3d">
+              Digital Shakthi
+              </span>
             </div>
             <div className="hidden sm:block w-px h-8 bg-white/30"></div>
             <div className="hidden sm:flex items-center space-x-2">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#DC2626] to-[#FF8C00] flex items-center justify-center">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#FF8C00] to-[#DC2626] flex items-center justify-center">
                 <span className="text-white font-bold text-xs">2026</span>
               </div>
             </div>
@@ -77,7 +79,7 @@ function Header() {
             </button>
             <button 
               onClick={handleBookNow}
-              className="bg-[#FF8C00] hover:bg-[#DC2626] text-white px-6 py-2.5 rounded-full font-bold transition-all duration-300 transform hover:scale-105 shadow-lg"
+              className="bg-gradient-to-r from-[#FF8C00] to-[#DC2626] hover:from-[#DC2626] hover:to-[#FF8C00] text-white px-6 py-2.5 rounded-full font-bold transition-all duration-300 transform hover:scale-105 shadow-lg"
             >
               Book Now
             </button>
@@ -121,7 +123,7 @@ function Header() {
             </button>
             <button 
               onClick={handleBookNow}
-              className="w-full bg-[#FF8C00] hover:bg-[#DC2626] text-white px-6 py-3 rounded-full font-bold transition-all duration-300 mt-4"
+              className="w-full bg-gradient-to-r from-[#FF8C00] to-[#DC2626] hover:from-[#DC2626] hover:to-[#FF8C00] text-white px-6 py-3 rounded-full font-bold transition-all duration-300 mt-4"
             >
               Book Now
             </button>
