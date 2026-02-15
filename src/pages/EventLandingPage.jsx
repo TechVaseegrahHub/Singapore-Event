@@ -35,8 +35,6 @@ function EventLandingPage() {
         <EventDetailsSection />
         <SectionDivider variant="wave" className="text-slate-50 -mt-1 relative z-20" />
         
-        <PartnersSection />
-        
         <Footer />
       </div>
     </>
