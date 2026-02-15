@@ -29,73 +29,105 @@ const STEPS = [
 
 const HowToBookSection = () => {
   return (
-    <section id="how-to-book" className="bg-[#2a4c9a] py-12 px-4 md:py-20 md:px-10">
+    <section id="how-to-book" className="bg-[#2a4c9a] py-12 md:py-20">
       <div className="max-w-7xl mx-auto">
         
         {/* Top Content Area */}
-        <div className="text-center mb-10 md:mb-16">
+        <div className="text-center mb-10 md:mb-16 px-4 md:px-10">
           <h2 className="text-3xl md:text-5xl font-bold mb-3 md:mb-4">
             <span className="text-white">How to </span>
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#ff930f] to-[#ff2828]">
               Book
             </span>
           </h2>
-          <p className="text-gray-200 text-base md:text-lg max-w-2xl mx-auto px-2">
+          <p className="text-gray-200 text-base md:text-lg max-w-2xl mx-auto">
             Follow these 4 simple steps to complete your registration and receive your ticket instantly.
           </p>
         </div>
 
         {/* 
-          Container Logic:
-          - Mobile: Carousel (horizontal scroll)
+          Carousel Container:
+          - Mobile: True carousel with edge-to-edge scrolling
           - Desktop: 4-column Grid
         */}
-        <div className="flex overflow-x-auto pb-8 gap-6 snap-x snap-mandatory md:grid md:grid-cols-4 md:pb-0 md:gap-8 scrollbar-hide">
-          {STEPS.map((item) => (
-            <div 
-              key={item.id} 
-              className="flex-shrink-0 w-[85%] sm:w-[60%] md:w-full snap-center group flex flex-col"
-            >
-              {/* Step Label and Title (Outside the card) */}
-              <div className="mb-4 md:mb-6 text-center md:text-left pl-1">
-                <span className="inline-block px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm text-white font-semibold text-xs md:text-sm mb-2 uppercase tracking-wider">
-                  {item.step}
-                </span>
-                <h3 className="text-xl md:text-2xl font-bold text-white tracking-wide">
-                  {item.title}
-                </h3>
-              </div>
+        <div className="relative">
+          {/* Mobile Carousel */}
+          <div className="md:hidden">
+            <div className="flex overflow-x-auto pb-8 gap-4 snap-x snap-mandatory scrollbar-hide px-4">
+              {STEPS.map((item) => (
+                <div 
+                  key={item.id} 
+                  className="flex-shrink-0 w-[280px] snap-center flex flex-col"
+                >
+                  {/* Step Label and Title */}
+                  <div className="mb-4 text-center">
+                    <span className="inline-block px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm text-white font-semibold text-xs mb-2 uppercase tracking-wider">
+                      {item.step}
+                    </span>
+                    <h3 className="text-xl font-bold text-white tracking-wide">
+                      {item.title}
+                    </h3>
+                  </div>
 
-              {/* 
-                Image Card Container 
-                - REMOVED: p-4, p-6 (padding)
-                - ADDED: overflow-hidden (clips image to rounded corners)
-                - RESULT: Image fills the card edge-to-edge
-              */}
-              <div className="bg-white rounded-3xl md:rounded-[2rem] overflow-hidden shadow-2xl transition-transform duration-300 group-hover:md:-translate-y-2 border border-white/10">
-                <div className="relative w-full aspect-[9/16]">
-                  <img
-                    src={item.src}
-                    alt={item.title}
-                    className="absolute inset-0 w-full h-full object-cover"
-                    loading="lazy"
-                  />
+                  {/* Image Card - Full bleed, no padding */}
+                  <div className="bg-black rounded-3xl overflow-hidden shadow-2xl flex-1">
+                    <div className="relative w-full h-full min-h-[480px]">
+                      <img
+                        src={item.src}
+                        alt={item.title}
+                        className="absolute inset-0 w-full h-full object-cover scale-[1.08]"
+                        loading="lazy"
+                      />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Mobile Swipe Indicator Dots */}
+            <div className="flex justify-center gap-2 mt-4">
+              {STEPS.map((_, i) => (
+                <div 
+                  key={i} 
+                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                    i === 0 ? 'bg-orange-500 w-4' : 'bg-white/40'
+                  }`}
+                ></div>
+              ))}
+            </div>
+          </div>
+
+          {/* Desktop Grid */}
+          <div className="hidden md:grid md:grid-cols-4 md:gap-8 md:px-10">
+            {STEPS.map((item) => (
+              <div 
+                key={item.id} 
+                className="group flex flex-col"
+              >
+                {/* Step Label and Title */}
+                <div className="mb-6 text-left pl-1">
+                  <span className="inline-block px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm text-white font-semibold text-sm mb-2 uppercase tracking-wider">
+                    {item.step}
+                  </span>
+                  <h3 className="text-2xl font-bold text-white tracking-wide">
+                    {item.title}
+                  </h3>
+                </div>
+
+                {/* Image Card - Full bleed, no padding */}
+                <div className="bg-white rounded-[2rem] overflow-hidden shadow-2xl transition-transform duration-300 group-hover:-translate-y-2 border border-white/10">
+                  <div className="relative w-full aspect-[9/16]">
+                    <img
+                      src={item.src}
+                      alt={item.title}
+                      className="absolute inset-0 w-full h-full object-cover scale-[1.08]"
+                      loading="lazy"
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Mobile Swipe Indicator Dots */}
-        <div className="flex justify-center gap-2 mt-4 md:hidden">
-          {STEPS.map((_, i) => (
-            <div 
-              key={i} 
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                i === 0 ? 'bg-orange-500 w-4' : 'bg-white/40'
-              }`}
-            ></div>
-          ))}
+            ))}
+          </div>
         </div>
 
         {/* Book Your Seat Button */}
