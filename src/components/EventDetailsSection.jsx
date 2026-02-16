@@ -132,5 +132,3 @@ const HowToBookSection = () => {
 };
 
 export default HowToBookSection;
-
-
