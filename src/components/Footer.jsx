@@ -23,7 +23,7 @@ function Footer() {
             <div className="flex items-center space-x-2 mb-4">
               <span className="text-3xl font-black text-white">Digital</span>
               <span className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#FF8C00] to-[#DC2626]">
-               Shakthi
+               Sakthi
               </span>
             </div>
             <p className="text-white/80 leading-relaxed">
@@ -72,7 +72,7 @@ function Footer() {
           <div className="flex flex-col items-center justify-center text-center space-y-2">
 
             <p className="text-white/60 text-sm">
-              © 2026 Digital Shakthi. All rights reserved.
+              © 2026 Digital Sakthi. All rights reserved.
             </p>
 
             <p className="text-white/60 text-sm">
