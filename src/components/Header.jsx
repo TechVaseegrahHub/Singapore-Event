@@ -40,7 +40,7 @@ function Header() {
             <div className="flex items-center">
              
                <span className="text-4xl sm:text-5xl md:text-6xl lg:text-2xl font-black text-white leading-tight tracking-tight text-shadow-3d">
-              Digital Shakthi
+              Digital Sakthi
               </span>
             </div>
             <div className="hidden sm:block w-px h-8 bg-white/30"></div>
