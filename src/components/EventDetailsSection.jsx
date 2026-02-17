@@ -5,25 +5,25 @@ const STEPS = [
     id: 1,
     step: "Step 1",
     title: "Start Chat",
-    src: "/assets/image/Image5.png",
+    src: "/assets/image/Image1.png",
   },
   {
     id: 2,
     step: "Step 2",
     title: "Registration",
-    src: "/assets/image/Image6.png",
+    src: "/assets/image/Image2.png",
   },
   {
     id: 3,
     step: "Step 3",
     title: "Payment",
-    src: "/assets/image/Image7.png",
+    src: "/assets/image/Image3.png",
   },
   {
     id: 4,
     step: "Step 4",
     title: "Receive Ticket",
-    src: "/assets/image/Image8.png",
+    src: "/assets/image/Image4.png",
   },
 ];
 
