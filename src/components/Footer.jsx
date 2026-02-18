@@ -44,7 +44,7 @@ function Footer() {
                   href="tel:+6580576921"
                   className="text-white/80 hover:text-[#FF8C00] transition-colors text-sm"
                 >
-                  +65 8512 0360
+                  +65 80576921
                 </a>
               </div>
               <div className="flex items-center space-x-3">
