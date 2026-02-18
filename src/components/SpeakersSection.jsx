@@ -8,7 +8,7 @@ function SpeakersSection() {
       name: 'VIJAYA',
       surname: 'MAHADEVAN',
       title: 'FOUNDER',
-      company: 'VASEEGARA VEDHA',
+      company: 'VASEEGRAH VEDA',
       image: './assets/image/vijaya.png',
       color: 'from-[#DC2626] to-[#EF4444]',
       textColor: '#DC2626',
