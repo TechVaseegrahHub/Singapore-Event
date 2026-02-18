@@ -50,7 +50,7 @@ function Footer() {
                   href="https://wa.me/6585120360"
                   className="text-white/80 hover:text-[#FF8C00] transition-colors text-sm"
                 >
-                  +65 8512 0360
+                  +65 80579621
                 </a>
               </div>
               <div className="flex items-center space-x-3">
