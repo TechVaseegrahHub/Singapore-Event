@@ -41,7 +41,7 @@ function Footer() {
               <div className="flex items-center space-x-3">
                 <Phone size={20} className="text-[#FF8C00] flex-shrink-0" />
                 <a
-                  href="tel:+6585120360"
+                  href="tel:+6580576921"
                   className="text-white/80 hover:text-[#FF8C00] transition-colors text-sm"
                 >
                   +65 8512 0360
